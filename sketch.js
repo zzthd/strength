@@ -22,15 +22,15 @@ function draw() {
   // 映射音量到图像索引 0~15
   let index = 0;
 
-if (vol < 0.05) {
+if (vol < 0.1) {
   index = 0;
-} else if (vol < 0.1) {
-  index = 3;
 } else if (vol < 0.2) {
-  index = 6;
+  index = 3;
 } else if (vol < 0.3) {
-  index = 9;
+  index = 6;
 } else if (vol < 0.4) {
+  index = 9;
+} else if (vol < 0.5) {
   index = 12;
 } else {
   index = 13
