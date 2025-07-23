@@ -14,10 +14,25 @@ function setup() {
   mic.start();
   imageMode(CORNER);
 }
-
+} else {
+    // 状态一：播放待机动画
+    if (now - lastFrameTime > idleFrameSpeed) {
+      idleFrameIndex = (idleFrameIndex + 1) % idleImages.length;
+      lastFrameTime = now;
+    }
+  }
 function draw() {
   background(255);
+ if (vol > micThreshold) {
+    activeCount++;
+  } else {
+    activeCount = 0;
+  }
 
+  // 当第一次有效吹气时，标记交互开始
+  if (activeCount >= activeThreshold && !hasStartedBlowing) {
+    hasStartedBlowing = true;
+  }
   let vol = mic.getLevel();
   // 映射音量到图像索引 0~15
   let index = 0;
