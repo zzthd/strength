@@ -19,14 +19,14 @@ let endFrameIndex = 0;
 let lastFrameTime = 0;
 
 // --- 麦克风灵敏度控制 ---
-const micThreshold = 0.05; // 吹气音量的判定阈值
+const micThreshold = 0.08; // 吹气音量的判定阈值
 let activeCount = 0;       // 用于检测持续吹气的计数器
 const activeThreshold = 3; // 需要持续吹气3帧才算有效开始，防止误触
 
 function preload() {
   // 1. 加载待机动画 (假设有10帧)
-  for (let i = 1; i <= 10; i++) {
-    let filename = `idle-${String(i).padStart(2, '0')}.png`;
+  for (let i = 1; i <= 19; i++) {
+    let filename = `first-${String(i).padStart(2, '0')}.png`;
     idleImages.push(loadImage(filename));
   }
 
@@ -38,7 +38,7 @@ function preload() {
 
   // 3. 加载结尾动画 (假设有10帧)
   for (let i = 1; i <= 10; i++) {
-    let filename = `end-${String(i).padStart(2, '0')}.png`;
+    let filename = `sup-${String(i).padStart(2, '0')}.png`;
     endImages.push(loadImage(filename));
   }
 }
@@ -104,9 +104,7 @@ function draw() {
     // 停止吹气时，不退回，保持在当前帧 (如果你希望它退回，可以加入之前的倒退逻辑)
     // 如果希望不吹的时候回到待机，可以在这里直接重置状态
     if (activeCount < activeThreshold) {
-        // hasStartedBlowing = false; // 取消这行注释，就会在不吹时立刻回到待机
-    }
-
+       
   } else {
     // 状态一：播放待机动画
     if (now - lastFrameTime > idleFrameSpeed) {
